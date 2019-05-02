@@ -1,14 +1,14 @@
-FROM openjdk
+FROM ubuntu
 
 WORKDIR /usr/src/app
 
-COPY . .
+RUN apt-get install maven jdk
 
-RUN chmod +x mvnw
+COPY . .
 
 RUN ls -al
 
-RUN ./mvnw clean package
+RUN mvn clean package
 
 EXPOSE 8080
 
