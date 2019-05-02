@@ -2,7 +2,8 @@ FROM ubuntu
 
 WORKDIR /usr/src/app
 
-RUN apt-get install maven jdk
+RUN apt-get update
+RUN apt-get install -y maven default-jre
 
 COPY . .
 
