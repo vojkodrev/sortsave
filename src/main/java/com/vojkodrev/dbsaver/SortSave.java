@@ -12,7 +12,7 @@ public class SortSave {
   {
 
 
-    logger.info("START!");
+    logger.info("START + PARSE!");
 
     Observable
       .create(new FileLineReader(args[0]))
