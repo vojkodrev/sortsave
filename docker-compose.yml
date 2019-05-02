@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+
+  postgres:
+    image: "postgres"
+    container_name: postgres-sort-save
+    volumes:
+      - "./postgresdb:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+
+
+
+#docker run --name postgres-sort-save -p 5432:5432 -e POSTGRES_PASSWORD=sortsavepass -v ~/postgres-sort-save:/var/lib/postgresql/data -d postgres
