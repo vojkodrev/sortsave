@@ -22,7 +22,8 @@ docker logs sortsave_app_1
 ## Connecting to Postgres db
 
 Port 5432 is exposed. So just connect to localhost:5432 with you favourite psql client.
-Default username is postgres and password is sortsavepass.
+
+Default username is postgres and password is sortsavepass. Database is sortsave.
 
 ## Stopping
 
