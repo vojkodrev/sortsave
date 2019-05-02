@@ -25,19 +25,25 @@ public class SortSaveLineDbSaver implements ObservableSource<List<SortSaveLine>>
   @Override
   public void subscribe(Observer<? super List<SortSaveLine>> observer) {
 
-    logger.info("BEFORE DB SAVE");
+    try {
+      logger.info("BEFORE DB SAVE");
 
-    Transaction tx = session.beginTransaction();
-    for (int i = 0; i < list.size(); i++) {
-      SortSaveLine ssl = list.get(i);
-      ssl.savedAt = System.currentTimeMillis();
-      session.save(ssl);
+      Transaction tx = session.beginTransaction();
+      for (int i = 0; i < list.size(); i++) {
+        SortSaveLine ssl = list.get(i);
+        ssl.savedAt = System.currentTimeMillis();
+        session.save(ssl);
+      }
+      tx.commit();
+
+      logger.info("AFTER DB SAVE");
+
+      observer.onNext(list);
+      observer.onComplete();
+
+    } catch (Throwable t) {
+      observer.onError(t);
     }
-    tx.commit();
 
-    logger.info("AFTER DB SAVE");
-
-    observer.onNext(list);
-    observer.onComplete();
   }
 }
