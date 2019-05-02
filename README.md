@@ -1,6 +1,6 @@
-# Project Title
+# Sort Save
 
-Sort Save
+Project that saves data from a text file to a Postgres database as soon as possible.
 
 ## Getting Started
 
