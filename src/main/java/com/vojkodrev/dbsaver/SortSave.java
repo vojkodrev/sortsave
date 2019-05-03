@@ -17,10 +17,10 @@ public class SortSave {
     Observable
       .create(new FileLineReader(args[0]))
       .skip(1)
-      .flatMap(line -> new SortSaveRegexParser(line))
+      .flatMap(SortSaveRegexParser::new)
       .buffer(10, TimeUnit.SECONDS)
-      .flatMap(list -> new SortSaveLineSorter(list))
-      .flatMap(list -> new SortSaveLineDbSaver(list))
+      .flatMap(SortSaveLineSorter::new)
+      .flatMap(SortSaveLineDbSaver::new)
       .subscribe(
         list -> {
           logger.info(list.size());
