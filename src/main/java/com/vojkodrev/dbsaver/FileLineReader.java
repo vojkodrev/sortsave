@@ -30,6 +30,8 @@ public class FileLineReader implements ObservableOnSubscribe<String> {
         observableEmitter.onNext(line);
       }
 
+      bufferreader.close();
+
       observableEmitter.onComplete();
 
     } catch (Throwable e) {
