@@ -22,7 +22,7 @@ public class SortSaveLineSorter implements ObservableSource<List<SortSaveLine>> 
     logger.info("BEFORE SORT");
 
     Collections.sort(list, (o1, o2) -> {
-      int matchIdD = o1.matchId - o2.matchId;
+      int matchIdD = o1.matchId.compareTo(o2.matchId);
       if (matchIdD != 0) {
         return matchIdD;
       }

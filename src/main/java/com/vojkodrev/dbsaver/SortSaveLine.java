@@ -1,7 +1,8 @@
 package com.vojkodrev.dbsaver;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class SortSaveLine {
@@ -13,17 +14,22 @@ public class SortSaveLine {
   public long createdAt;
   public long savedAt;
 
-  public int matchId;
+  @CsvBindByName(column = "MATCH_ID")
+  public String matchId;
+
+  @CsvBindByName(column = "MARKET_ID")
   public int marketId;
+
+  @CsvBindByName(column = "OUTCOME_ID")
   public String outcomeId;
+
+  @CsvBindByName(column = "SPECIFIERS")
   public String specifiers;
-
-
 
   public SortSaveLine() {
   }
 
-  public SortSaveLine(int matchId, int marketId, String outcomeId, String specifiers, long createdAt) {
+  public SortSaveLine(String matchId, int marketId, String outcomeId, String specifiers, long createdAt) {
     this.matchId = matchId;
     this.marketId = marketId;
     this.outcomeId = outcomeId;

@@ -12,22 +12,20 @@ public class SortSave {
   {
 
 
-    logger.info("START + PARSE!");
+    logger.info("START!");
 
     Observable
-      .create(new FileLineReader(args[0]))
-      .skip(1)
-      .flatMap(line -> new SortSaveRegexParser(line))
+      .create(new SortSaveCSVParser(args[0]))
       .buffer(10, TimeUnit.SECONDS)
-      .flatMap(list -> new SortSaveLineSorter(list))
-      .flatMap(list -> new SortSaveLineDbSaver(list))
+//      .flatMap(list -> new SortSaveLineSorter(list))
+//      .flatMap(list -> new SortSaveLineDbSaver(list))
       .subscribe(
         list -> {
-          logger.info(list.size());
-          for (int i = 0; i < 5 && i < list.size(); i++) {
-            SortSaveLine ss = list.get(i);
-            logger.info(ss.toString());
-          }
+//          logger.info(list.size());
+//          for (int i = 0; i < 5 && i < list.size(); i++) {
+//            SortSaveLine ss = list.get(i);
+//            logger.info(ss.toString());
+//          }
         },
         error -> {
           logger.error(error.getMessage(), error);
