@@ -39,6 +39,6 @@ public class SortSaveLine {
 
   @Override
   public String toString() {
-    return String.format("Match Id = %d, Market Id = %d, Outcome Id = %s, Specifiers = %s", matchId, marketId, outcomeId, specifiers);
+    return String.format("Match Id = %s, Market Id = %d, Outcome Id = %s, Specifiers = %s", matchId, marketId, outcomeId, specifiers);
   }
 }
