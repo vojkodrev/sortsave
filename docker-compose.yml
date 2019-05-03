@@ -18,6 +18,3 @@ services:
     depends_on:
       - postgres
 
-
-
-#docker run --name postgres-sort-save -p 5432:5432 -e POSTGRES_PASSWORD=sortsavepass -v ~/postgres-sort-save:/var/lib/postgresql/data -d postgres
