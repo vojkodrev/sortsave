@@ -11,6 +11,4 @@ RUN ls -al
 
 RUN mvn clean package
 
-EXPOSE 8080
-
 CMD ["java", "-jar", "target/sort-save-0.0.1-SNAPSHOT-jar-with-dependencies.jar", "fo_random.txt"]
