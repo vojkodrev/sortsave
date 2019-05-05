@@ -1,13 +1,17 @@
 package com.vojkodrev.dbsaver;
 
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import org.apache.log4j.Logger;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SortSaveRegexParser implements ObservableSource<SortSaveLine> {
+public class SortSaveRegexParser implements ObservableOnSubscribe<SortSaveLine> {
 
+  final static Logger logger = Logger.getLogger(SortSave.class);
   private static final Pattern pattern = Pattern.compile("'.+?(\\d+?)'\\|(\\d+?)\\|'(.+?)'\\|('(.+?)')?");
   private final String line;
 
@@ -16,7 +20,10 @@ public class SortSaveRegexParser implements ObservableSource<SortSaveLine> {
   }
 
   @Override
-  public void subscribe(Observer<? super SortSaveLine> observer) {
+  public void subscribe(ObservableEmitter<SortSaveLine> observer) throws Exception {
+
+
+//    logger.info("Parsing");
 
     Matcher matcher = pattern.matcher(line);
 

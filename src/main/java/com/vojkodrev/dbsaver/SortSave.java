@@ -1,6 +1,8 @@
 package com.vojkodrev.dbsaver;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.schedulers.Schedulers;
 import org.apache.log4j.Logger;
 
 import java.util.concurrent.TimeUnit;
@@ -17,11 +19,15 @@ public class SortSave {
     Observable
       .create(new FileLineReader(args[0]))
       .skip(1)
-      .flatMap(SortSaveRegexParser::new)
+//      .subscribeOn(Schedulers.computation())
+//      .flatMap(SortSaveRegexParser::new)
+      .flatMap(line -> {
+        return Observable.create(new SortSaveRegexParser(line)).subscribeOn(Schedulers.computation());
+      }, 10)
       .buffer(10, TimeUnit.SECONDS)
       .flatMap(SortSaveLineSorter::new)
       .flatMap(SortSaveLineDbSaver::new)
-      .subscribe(
+      .blockingSubscribe(
         list -> {
           logger.info(list.size());
           for (int i = 0; i < 5 && i < list.size(); i++) {
